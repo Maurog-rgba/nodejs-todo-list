@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <base href="/" />
+    <script src="../public/scripts/index.js" type="text/javascript" defer></script>
+    <link rel="stylesheet" href="../public/styles/index.css" type="text/css" />
+  </head>
+  <body>
+    <div class="container">
+      <!--  -->
+
+      <div class="tasks-container">
+        <h1 class="list-title">Lista de tarefas</h1>
+        <button id="add-task-button" class="custom-button">&#43;</button>
+        <ol class="list">
+          <% tasks[0].forEach(task => { %>
+          <li class="list-item">
+            <div><%= task.title %> - <%= new Date(task.due_date).toLocaleDateString('pt-BR') %></div>
+            <div style="display: flex; justify-content: center; gap: 10px">
+              <button class="custom-button delete" data-id="<%= task.id %>">Excluir</button>
+              <button class="custom-button" data-id="<%= task.id %>">Editar</button>
+            </div>
+          </li>
+          <% }); %>
+        </ol>
+      </div>
+
+      <!-- Modal -->
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="form-container">
+            <h1 class="form-title">Adicionar Tarefa</h1>
+            <form>
+              <input type="text" id="title" name="title" placeholder="Título" required />
+              <br />
+              <textarea id="description" name="description" rows="4" cols="50" placeholder="Descrição" required></textarea>
+              <br />
+              <input type="date" id="due_date" name="due_date" placeholder="Prazo" required />
+              <br />
+              <button onclick="addTask()" type="submit">Adicionar Tarefa</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
