@@ -5,12 +5,19 @@ body {
   background: var(--background-color);
   display: grid;
   font-size: 1.6rem;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  min-width: 50%;
+  margin-top: 30px;
 }
 
 /* ----------------------------------------------------- */
 .tasks-container {
-  max-width: 500px;
+  min-height: 80vh;
   padding: 3rem;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -52,12 +59,18 @@ body {
 
 .tasks-container h1 {
   font-size: 15px;
-  top: 0;
+  top: 10px;
   margin: 10px;
   padding: 1.5rem 1rem;
-  position: sticky;
+  position: absolute;
   text-align: center;
   color: #394d61;
+}
+
+#add-task-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 /* CSS */
@@ -69,42 +82,11 @@ body {
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  font-family: "Codec cold", sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
-  height: 54px;
   justify-content: center;
-  letter-spacing: 0.4px;
-  line-height: 1;
-  max-width: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 3px;
-  text-decoration: none;
-  text-transform: uppercase;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  padding: 15px 20px;
   z-index: 2;
-}
-
-.custom-button:active {
-  outline: 0;
-}
-
-.custom-button:hover {
-  outline: 0;
-}
-
-.custom-button span {
-  transition: all 200ms;
-}
-
-.custom-button:hover span {
-  transform: scale(0.9);
-  opacity: 0.75;
 }
 
 @media screen and (max-width: 991px) {
@@ -136,6 +118,7 @@ body {
   border-radius: 3rem;
   background: var(--primary-color);
   padding: 1.1rem 1.5rem 1.1rem 1.5rem;
+  position: relative;
 }
 
 .modal {
@@ -170,4 +153,67 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.form-title {
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+input,
+textarea,
+.add-button {
+  border: 2px solid #333;
+  background-color: white;
+  border-radius: 0.25rem;
+  font: 1.25rem / 1.5 sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+textarea {
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.add-button {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.add-button:hover,
+#add-task-button:hover,
+.custom-button:hover {
+  background-image: linear-gradient(135deg, #fc894d, #f34079 40%);
+}
+
+.late,
+.done {
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.late {
+  background-color: #ff0000;
+}
+
+.done {
+  background-color: #008000;
 }

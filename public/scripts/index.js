@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  var addButton = document.getElementById("add-task-button");
-  var modal = document.getElementById("modal");
-  var closeButton = modal.querySelector(".close");
+  let addButton = document.getElementById("add-task-button");
+  let modal = document.getElementById("modal");
+  let closeButton = modal.querySelector(".close");
 
   addButton.addEventListener("click", function () {
     modal.style.display = "block";
@@ -46,6 +46,18 @@ function addTask() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(task),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        window.location.reload();
+      }
+    });
+}
+
+function doneTask(taskId) {
+  fetch(`/tasks/done/${taskId}`, {
+    method: "PUT",
   })
     .then((response) => response.json())
     .then((data) => {

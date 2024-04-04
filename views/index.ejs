@@ -1,52 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo List</title>
-    <base href="/" />
-    <script src="../public/scripts/index.js" type="text/javascript" defer></script>
-    <link rel="stylesheet" href="../public/styles/index.css" type="text/css" />
-    <link rel="stylesheet" href="../public/styles/utilities.css" type="text/css" />
-  </head>
-  <body>
-    <div class="container">
-      <!--  -->
 
-      <div class="tasks-container default-card">
-        <h1 class="list-title default-card">Lista de tarefas</h1>
-        <button id="add-task-button" class="custom-button">&#43;</button>
-        <ol class="list">
-          <% tasks[0].forEach(task => { %>
-          <li class="list-item default-card">
-            <div><%= task.title %> - <%= new Date(task.due_date).toLocaleDateString('pt-BR') %></div>
-            <div style="display: flex; justify-content: center; gap: 10px">
-              <button class="custom-button delete" data-id="<%= task.id %>">Excluir</button>
-              <button class="custom-button" data-id="<%= task.id %>">Editar</button>
-            </div>
-          </li>
-          <% }); %>
-        </ol>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List</title>
+  <base href="/" />
+  <script src="../public/scripts/index.js" type="text/javascript" defer></script>
+  <link rel="stylesheet" href="../public/styles/index.css" type="text/css" />
+  <link rel="stylesheet" href="../public/styles/utilities.css" type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
 
-      <!-- Modal -->
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <div class="form-container">
-            <h1 class="form-title">Adicionar Tarefa</h1>
-            <form>
-              <input type="text" id="title" name="title" placeholder="Título" required />
-              <br />
-              <textarea id="description" name="description" rows="4" cols="50" placeholder="Descrição" required></textarea>
-              <br />
-              <input type="date" id="due_date" name="due_date" placeholder="Prazo" required />
-              <br />
-              <button onclick="addTask()" type="submit">Adicionar Tarefa</button>
-            </form>
+<body>
+  <div class="container">
+    <div class="tasks-container default-card">
+      <h1 class="list-title default-card">Lista de tarefas</h1>
+      <button id="add-task-button" class="custom-button">&#43;</button>
+      <ol class="list">
+        <% tasks[0].forEach(task => { %>
+        <li class="list-item default-card">
+          <div><%= task.title %> - <%= new Date(task.due_date).toLocaleDateString('pt-BR') %></div>
+          <div style="display: flex; justify-content: center; gap: 10px">
+            <button class="custom-button delete" data-id="<%= task.id %>">Excluir</button>
+            <button class="custom-button" onclick="doneTask('<%= task.id %>')">Done</button>
           </div>
+          <% if (new Date(task.due_date) < new Date() && task.done === 0) { %>
+          <span class="late">
+            <span class="material-symbols-outlined">
+              calendar_clock
+            </span>
+          </span>
+          <% } %>
+          <% if (task.done === 1) { %>
+          <span class="done">
+            <span class="material-symbols-outlined">
+              check
+            </span>
+          </span>
+          <% } %>
+        </li>
+        <% }); %>
+      </ol>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content default-card">
+        <span class="close">&times;</span>
+        <div class="form-container">
+          <h1 class="form-title">Adicionar Tarefa</h1>
+          <form>
+            <input type="text" id="title" name="title" placeholder="Título" required />
+            <br />
+            <textarea id="description" name="description" rows="4" cols="50" placeholder="Descrição" required></textarea>
+            <br />
+            <input type="date" id="due_date" name="due_date" placeholder="Prazo" required />
+            <br />
+            <button onclick="addTask()" type="submit" class="add-button">Adicionar Tarefa</button>
+          </form>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

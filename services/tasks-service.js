@@ -21,7 +21,7 @@ class TasksService {
 
   createTask(task) {
     try {
-      const result = connection.query(`INSERT INTO tasks (title, description, due_date) VALUES (?, ?, ?)`, [task.title, task.description, task.due_date]);
+      const result = connection.query(`INSERT INTO tasks (title, description, due_date, done) VALUES (?, ?, ?, ?)`, [task.title, task.description, task.due_date, 0]);
 
       if (result) {
         return {
@@ -30,6 +30,23 @@ class TasksService {
         };
       } else {
         throw new Error("Erro ao criar tarefa", result);
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  doneTask(id) {
+    try {
+      const result = connection.query(`UPDATE tasks SET done = 1 WHERE id = ?`, [id]);
+
+      if (result) {
+        return {
+          message: "Tarefa marcada como feita com sucesso",
+          status: 200,
+        };
+      } else {
+        throw new Error("Erro ao marcar tarefa como feita", result);
       }
     } catch (error) {
       throw new Error(error.message);

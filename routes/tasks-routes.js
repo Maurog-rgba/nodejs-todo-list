@@ -26,6 +26,17 @@ router.post("/add", async (req, res, next) => {
   }
 });
 
+router.put("/done/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = tasksService.doneTask(id);
+    res.json(result);
+  } catch (err) {
+    console.error(`Erro ao marcar tarefa como feita: ${err.message}`);
+    next(err);
+  }
+});
+
 router.delete("/delete/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
