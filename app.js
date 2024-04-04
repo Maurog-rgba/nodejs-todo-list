@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/auth-routes.js";
 import tasksRoutes from "./routes/tasks-routes.js";
 import TasksService from "./services/tasks-service.js";
 
@@ -27,6 +28,8 @@ app.get("/", async (req, res) => {
     res.status(500).send("Erro ao listar tarefas");
   }
 });
+
+app.use("/auth", authRoutes);
 
 app.use("/tasks", tasksRoutes);
 
