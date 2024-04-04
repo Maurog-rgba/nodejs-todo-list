@@ -14,26 +14,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  // Botão de adicionar tarefa
   var addButton = document.getElementById("add-task-button");
-  // Modal
   var modal = document.getElementById("modal");
-  // Botão de fechar modal
   var closeButton = modal.querySelector(".close");
 
-  // Adiciona evento de clique ao botão de adicionar tarefa
   addButton.addEventListener("click", function () {
-    // Exibe o modal
     modal.style.display = "block";
   });
 
-  // Adiciona evento de clique ao botão de fechar modal
   closeButton.addEventListener("click", function () {
-    // Fecha o modal
     modal.style.display = "none";
   });
 
-  // Fecha o modal quando o usuário clicar fora dele
   window.addEventListener("click", function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
